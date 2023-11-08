@@ -35,6 +35,8 @@ downstream_package_name: golang
 #upstream_tag_template: "v{version}"
 
 actions:
+  create-archive:
+    - "bash ./scripts/packit.sh create-archive"
   post-upstream-clone:
     # Use the Fedora ELN package.
     - "git clone https://src.fedoraproject.org/rpms/golang.git .packit_rpm --branch eln"
@@ -42,7 +44,6 @@ actions:
     # Fix the specfile by running the ./scripts/packit.sh script
     # We cannot put the content of the script inside the yaml due to limitations of the format
     - "bash ./scripts/packit.sh"
-    - "cat .packit_rpm/golang.spec"
 
 jobs:
     # Build the package in Fedora ELN when a pull request is opened.
